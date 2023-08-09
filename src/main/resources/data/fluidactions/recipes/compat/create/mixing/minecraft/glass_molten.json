@@ -1,0 +1,13 @@
+{
+  "conditions": [{ "type": "forge:mod_loaded", "modid": "create" }],
+  "type": "create:mixing",
+  "heatRequirement": "none",
+  "ingredients": [
+    { "amount": 1000, "fluid": "minecraft:lava" },
+    { "tag": "minecraft:smelts_to_glass" }
+  ],
+  "results": [
+    { "amount": 1000, "fluid": "fluidactions:molten_glass" },
+    { "item": "minecraft:obsidian" }
+  ]
+}

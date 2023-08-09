@@ -1,0 +1,9 @@
+{
+	"required": true,
+	"priority": 1100,
+	"package": "zeh.fluidactions.mixin",
+	"compatibilityLevel": "JAVA_16",
+	"mixins": [
+	],
+	"minVersion": "0.8"
+}

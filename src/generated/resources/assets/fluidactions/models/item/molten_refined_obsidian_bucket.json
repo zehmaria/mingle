@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fluidactions:item/molten_refined_obsidian_bucket"
+  }
+}

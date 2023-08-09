@@ -1,0 +1,13 @@
+{
+  "conditions": [{ "type": "forge:mod_loaded", "modid": "create" }],
+  "type": "create:mixing",
+  "heatRequirement": "none",
+  "ingredients": [
+    { "amount": 1000, "fluid": "minecraft:lava" },
+    { "item": "minecraft:ancient_debris" }
+  ],
+  "results": [
+    { "amount": 1000, "fluid": "fluidactions:molten_debris" },
+    { "item": "minecraft:obsidian" }
+  ]
+}

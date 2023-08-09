@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    { "type": "forge:mod_loaded", "modid": "create" },
+    { "type": "forge:mod_loaded", "modid": "immersiveengineering" }
+  ],
+  "type": "create:mixing",
+  "heatRequirement": "none",
+  "ingredients": [
+    { "amount": 1000, "fluid": "minecraft:water" },
+    { "amount": 1000, "fluid": "fluidactions:molten_aluminum" }
+  ],
+  "results": [{ "item": "immersiveengineering:storage_aluminum" }]
+}

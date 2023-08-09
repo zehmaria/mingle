@@ -1,0 +1,221 @@
+
+##### Explanation 
+# 
+# before = requires a valid block or blockTag, or the String "ignore"
+# molten = requires a valid fluid (non-tag), or else it ignores the whole interaction
+# after = requires a valid block or blockTag, or the String "ignore"
+# slag = requires a valid block or blockTag
+#
+# before + lava source = molten (consumes lava)
+# molten + water source = after (consumes water)
+# flowing fluid + molten = slag (does not destroy molten)
+# any fluid + flowing molten = slag (does not destroy molten)
+# 
+##### List of interactions 
+[[interactions]]
+before = "#forge:storage_blocks/raw_iron"
+molten = "fluidactions:molten_iron"
+after = "#forge:storage_blocks/iron"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_gold"
+molten = "fluidactions:molten_gold"
+after = "#forge:storage_blocks/gold"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_copper"
+molten = "fluidactions:molten_copper"
+after = "#forge:storage_blocks/copper"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#fluidactions:andesite"
+molten = "fluidactions:molten_andesite"
+after = "minecraft:polished_andesite"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "minecraft:soul_sand"
+molten = "fluidactions:molten_soul"
+after = "minecraft:soul_soil"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "ignore"
+molten = "fluidactions:molten_ender"
+after = "ignore"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "minecraft:slime_block"
+molten = "fluidactions:molten_slime"
+after = "minecraft:slime_block"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#fluidactions:quartz"
+molten = "fluidactions:molten_quartz"
+after = "minecraft:quartz_block"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#minecraft:smelts_to_glass"
+molten = "fluidactions:molten_glass"
+after = "minecraft:glass"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "ignore"
+molten = "fluidactions:molten_netherite"
+after = "minecraft:netherite_block"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "minecraft:ancient_debris"
+molten = "fluidactions:molten_debris"
+after = "minecraft:ancient_debris"
+slag = "minecraft:stone"
+
+# BOTANIA
+[[interactions]]
+before = "ignore"
+molten = "fluidactions:molten_manasteel"
+after = "botania:manasteel_block"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "ignore"
+molten = "fluidactions:molten_elementium"
+after = "botania:elementium_block"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "ignore"
+molten = "fluidactions:molten_terrasteel"
+after = "botania:terrasteel_block"
+slag = "minecraft:stone"
+
+# CREATE
+[[interactions]]
+before = "#forge:storage_blocks/raw_zinc"
+molten = "fluidactions:molten_zinc"
+after = "#forge:storage_blocks/zinc"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_brass"
+molten = "fluidactions:molten_brass"
+after = "#forge:storage_blocks/brass"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "ignore"
+molten = "fluidactions:molten_andesite_alloy"
+after = "create:andesite_alloy_block"
+slag = "minecraft:stone"
+
+# GENERAL
+[[interactions]]
+before = "ignore"
+molten = "fluidactions:molten_refined_glowstone"
+after = "#forge:storage_blocks/refined_glowstone"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "ignore"
+molten = "fluidactions:molten_refined_obsidian"
+after = "#forge:storage_blocks/refined_obsidian"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_osmium"
+molten = "fluidactions:molten_osmium"
+after = "#forge:storage_blocks/osmium"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_bronze"
+molten = "fluidactions:molten_bronze"
+after = "#forge:storage_blocks/bronze"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_tin"
+molten = "fluidactions:molten_tin"
+after = "#forge:storage_blocks/tin"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_lead"
+molten = "fluidactions:molten_lead"
+after = "#forge:storage_blocks/lead"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_uranium"
+molten = "fluidactions:molten_uranium"
+after = "#forge:storage_blocks/uranium"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_steel"
+molten = "fluidactions:molten_steel"
+after = "#forge:storage_blocks/steel"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_electrum"
+molten = "fluidactions:molten_electrum"
+after = "#forge:storage_blocks/electrum"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_aluminum"
+molten = "fluidactions:molten_aluminum"
+after = "#forge:storage_blocks/aluminum"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_constantan"
+molten = "fluidactions:molten_constantan"
+after = "#forge:storage_blocks/constantan"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_nickel"
+molten = "fluidactions:molten_nickel"
+after = "#forge:storage_blocks/nickel"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_silver"
+molten = "fluidactions:molten_silver"
+after = "#forge:storage_blocks/silver"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_invar"
+molten = "fluidactions:molten_invar"
+after = "#forge:storage_blocks/invar"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_desh"
+molten = "fluidactions:molten_desh"
+after = "#forge:storage_blocks/desh"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_ostrum"
+molten = "fluidactions:molten_ostrum"
+after = "#forge:storage_blocks/ostrum"
+slag = "minecraft:stone"
+
+[[interactions]]
+before = "#forge:storage_blocks/raw_calorite"
+molten = "fluidactions:molten_calorite"
+after = "#forge:storage_blocks/calorite"
+slag = "minecraft:stone"
+

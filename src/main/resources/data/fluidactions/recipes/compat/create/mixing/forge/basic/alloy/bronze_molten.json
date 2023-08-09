@@ -1,0 +1,10 @@
+{
+  "conditions": [{ "type": "forge:mod_loaded", "modid": "create" }],
+  "type": "create:mixing",
+  "heatRequirement": "none",
+  "ingredients": [
+    { "amount": 250, "fluid": "fluidactions:molten_tin" },
+    { "amount": 750, "fluid": "fluidactions:molten_copper" }
+  ],
+  "results": [{ "amount": 1000, "fluid": "fluidactions:molten_bronze" }]
+}

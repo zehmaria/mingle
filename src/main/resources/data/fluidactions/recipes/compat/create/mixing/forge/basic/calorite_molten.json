@@ -1,0 +1,17 @@
+{
+    "conditions":[
+        { "type": "forge:mod_loaded", "modid": "create" },
+        { "type": "forge:not",  "value":{ "type": "forge:tag_empty", "tag": "forge:storage_blocks/raw_calorite" }}
+    ],
+    "type": "create:mixing",
+    "heatRequirement": "none",
+    "ingredients": [
+        { "amount": 1000, "fluid": "minecraft:lava" },
+        { "tag": "forge:storage_blocks/raw_calorite" }
+    ],
+    "results": [
+        { "amount": 1000, "fluid": "fluidactions:molten_calorite" },
+        { "item": "minecraft:obsidian" }
+    ]
+}
+

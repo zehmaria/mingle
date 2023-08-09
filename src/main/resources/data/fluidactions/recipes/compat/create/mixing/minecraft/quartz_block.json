@@ -1,0 +1,10 @@
+{
+  "conditions": [{ "type": "forge:mod_loaded", "modid": "create" }],
+  "type": "create:mixing",
+  "heatRequirement": "none",
+  "ingredients": [
+    { "amount": 1000, "fluid": "minecraft:water" },
+    { "amount": 1000, "fluid": "fluidactions:molten_quartz" }
+  ],
+  "results": [{ "item": "minecraft:quartz_block" }]
+}
