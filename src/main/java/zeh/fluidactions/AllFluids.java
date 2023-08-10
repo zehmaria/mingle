@@ -31,7 +31,6 @@ import java.util.function.Supplier;
 
 import static zeh.fluidactions.FluidActions.REGISTRATE;
 
-import zeh.fluidactions.common.Configuration;
 import zeh.fluidactions.foundation.data.Enroll;
 import zeh.fluidactions.foundation.utility.Color;
 

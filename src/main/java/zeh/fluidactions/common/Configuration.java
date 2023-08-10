@@ -2,10 +2,8 @@ package zeh.fluidactions.common;
 
 import com.electronwill.nightconfig.core.CommentedConfig;
 import com.electronwill.nightconfig.core.conversion.ObjectConverter;
-import com.tterrag.registrate.util.entry.FluidEntry;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.IConfigSpec;
@@ -77,7 +75,6 @@ public class Configuration {
 
 		String name = FluidActions.ID + "-interactions.toml";
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.INTERACTIONS_SPEC, name);
-		//File df = new File(FMLPaths.GAMEDIR.get().resolve(FMLConfig.defaultConfigPath()) + "/" + name);
 		File df = new File(FMLPaths.GAMEDIR.get().resolve("config") + "/" + name);
 
 		if (!df.exists()) {

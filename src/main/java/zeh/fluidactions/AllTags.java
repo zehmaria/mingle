@@ -17,19 +17,19 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static zeh.fluidactions.AllTags.NameSpace.MOD;
-import zeh.fluidactions.foundation.utility.Lang;
 
 import java.util.Collections;
+import java.util.Locale;
 
 public class AllTags {
+
+    public static String asId(String name) { return name.toLowerCase(Locale.ROOT); }
     public static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry, ResourceLocation id) {
         return registry.tags().createOptionalTagKey(id, Collections.emptySet());
     }
-
     public static <T> TagKey<T> forgeTag(IForgeRegistry<T> registry, String path) {
         return optionalTag(registry, new ResourceLocation("forge", path));
     }
-
     public static TagKey<Block> forgeBlockTag(String path) {
         return forgeTag(ForgeRegistries.BLOCKS, path);
     }
@@ -83,7 +83,7 @@ public class AllTags {
         }
 
         AllBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
+            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? asId(name()) : path);
             if (optional) {
                 tag = optionalTag(ForgeRegistries.BLOCKS, id);
             } else {
@@ -130,7 +130,7 @@ public class AllTags {
             this(namespace, null, optional, alwaysDatagen);
         }
         AllItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
+            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? asId(name()) : path);
             if (optional) {
                 tag = optionalTag(ForgeRegistries.ITEMS, id);
             } else {
@@ -170,7 +170,7 @@ public class AllTags {
         }
 
         AllFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? Lang.asId(name()) : path);
+            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? asId(name()) : path);
             if (optional) {
                 tag = optionalTag(ForgeRegistries.FLUIDS, id);
             } else {
