@@ -6,12 +6,7 @@ import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 
-import net.minecraft.core.Holder;
-import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagBuilder;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -23,9 +18,6 @@ import zeh.fluidactions.AllTags.AllItemTags;
 import zeh.fluidactions.AllTags.AllFluidTags;
 import zeh.fluidactions.AllTags;
 import zeh.fluidactions.FluidActions;
-
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 public class TagGen {
     public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, BlockBuilder<T, P>> axeOrPickaxe() {
@@ -59,10 +51,9 @@ public class TagGen {
         FluidActions.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, TagGen::genFluidTags);
     }
 
-    private static void genBlockTags(RegistrateTagsProvider<Block> provIn) {
-        AnotherTagsProvider<Block> prov = new AnotherTagsProvider<>(provIn, Block::builtInRegistryHolder);
-        // VALIDATE
+    private static void genBlockTags(RegistrateTagsProvider<Block> prov) {
 
+        // VALIDATE
         for (AllBlockTags tag : AllBlockTags.values()) {
             if (tag.alwaysDatagen) {
                 prov.getOrCreateRawBuilder(tag.tag);
@@ -70,8 +61,7 @@ public class TagGen {
         }
     }
 
-    private static void genItemTags(RegistrateTagsProvider<Item> provIn) {
-        AnotherTagsProvider<Item> prov = new AnotherTagsProvider<>(provIn, Item::builtInRegistryHolder);
+    private static void genItemTags(RegistrateTagsProvider<Item> prov) {
 
         prov.tag(AllItemTags.LAVA_RESISTANT.tag)
                 .add(Items.NETHERITE_AXE)
@@ -97,62 +87,14 @@ public class TagGen {
         }
     }
 
-    private static void genFluidTags(RegistrateTagsProvider<Fluid> provIn) {
-        AnotherTagsProvider<Fluid> prov = new AnotherTagsProvider<>(provIn, Fluid::builtInRegistryHolder);
+    private static void genFluidTags(RegistrateTagsProvider<Fluid> prov) {
 
         // VALIDATE
-
         for (AllFluidTags tag : AllFluidTags.values()) {
             if (tag.alwaysDatagen) {
                 prov.getOrCreateRawBuilder(tag.tag);
             }
         }
     }
-
-    public static class AnotherTagsProvider<T> {
-
-        private RegistrateTagsProvider<T> provider;
-        private Function<T, ResourceKey<T>> keyExtractor;
-
-        public AnotherTagsProvider(RegistrateTagsProvider<T> provider, Function<T, Holder.Reference<T>> refExtractor) {
-            this.provider = provider;
-            this.keyExtractor = refExtractor.andThen(Holder.Reference::key);
-        }
-
-        public AnotherTagAppender<T> tag(TagKey<T> tag) {
-            TagBuilder tagbuilder = getOrCreateRawBuilder(tag);
-            return new AnotherTagAppender<>(tagbuilder, keyExtractor, FluidActions.ID);
-        }
-
-        public TagBuilder getOrCreateRawBuilder(TagKey<T> tag) {
-            return provider.addTag(tag).getInternalBuilder();
-        }
-
-    }
-
-    public static class AnotherTagAppender<T> extends TagsProvider.TagAppender<T> {
-
-        private Function<T, ResourceKey<T>> keyExtractor;
-
-        public AnotherTagAppender(TagBuilder pBuilder, Function<T, ResourceKey<T>> pKeyExtractor, String modId) {
-            super(pBuilder, modId);
-            this.keyExtractor = pKeyExtractor;
-        }
-
-        public AnotherTagAppender<T> add(T entry) {
-            this.add(this.keyExtractor.apply(entry));
-            return this;
-        }
-
-        @SafeVarargs
-        public final AnotherTagAppender<T> add(T... entries) {
-            Stream.<T>of(entries)
-                    .map(this.keyExtractor)
-                    .forEach(this::add);
-            return this;
-        }
-
-    }
-
 
 }

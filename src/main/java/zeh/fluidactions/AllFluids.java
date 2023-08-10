@@ -7,7 +7,6 @@ import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 
 import net.minecraft.client.Camera;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -23,17 +22,12 @@ import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.*;
 import static net.minecraftforge.fluids.ForgeFlowingFluid.Flowing;
 
-import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3f;
-
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static zeh.fluidactions.FluidActions.REGISTRATE;
 
-import zeh.fluidactions.common.Configuration;
 import zeh.fluidactions.foundation.data.Enroll;
-import zeh.fluidactions.foundation.utility.Color;
 
 public class AllFluids {
 
@@ -145,13 +139,6 @@ public class AllFluids {
                 }
 
                 @Override
-                public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level,
-                                                        int renderDistance, float darkenWorldAmount, Vector3f fluidFogColor) {
-                    Vector3f customFogColor = TintedFluidType.this.getCustomFogColor();
-                    return customFogColor == null ? fluidFogColor : customFogColor;
-                }
-
-                @Override
                 public void modifyFogRender(Camera camera, FogRenderer.FogMode mode, float renderDistance, float partialTick,
                                             float nearDistance, float farDistance, FogShape shape) {
                     float modifier = TintedFluidType.this.getFogDistanceModifier();
@@ -170,10 +157,6 @@ public class AllFluids {
 
         protected abstract int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos);
 
-        protected Vector3f getCustomFogColor() {
-            return null;
-        }
-
         protected float getFogDistanceModifier() {
             return 1f;
         }
@@ -182,16 +165,9 @@ public class AllFluids {
 
     private static class SolidRenderedPlaceableFluidType extends TintedFluidType {
 
-        private Vector3f fogColor;
-        private Supplier<Float> fogDistance;
-        public void setFogColor(Vector3f fogColor) { this.fogColor = fogColor; }
-        public void setFogDistance(Supplier<Float> fogDistance) { this.fogDistance = fogDistance; }
-
         public static FluidBuilder.FluidTypeFactory create(int fogColor, Supplier<Float> fogDistance) {
             return (p, s, f) -> {
                 SolidRenderedPlaceableFluidType fluidType = new SolidRenderedPlaceableFluidType(p, s, f);
-                fluidType.fogColor = new Color(fogColor, false).asVectorF();
-                fluidType.fogDistance = fogDistance;
                 return fluidType;
             };
         }
@@ -212,15 +188,6 @@ public class AllFluids {
         public int getTintColor(FluidState state, BlockAndTintGetter world, BlockPos pos) {
             return 0x00ffffff;
         }
-        @Override
-        protected Vector3f getCustomFogColor() {
-            return fogColor;
-        }
-        @Override
-        protected float getFogDistanceModifier() {
-            return fogDistance.get();
-        }
-
     }
     private static class MoltenFluidType extends SolidRenderedPlaceableFluidType {
 
@@ -231,15 +198,10 @@ public class AllFluids {
         public static FluidBuilder.FluidTypeFactory create(int fogColor, Supplier<Float> fogDistance) {
             return (p, s, f) -> {
                 MoltenFluidType fluidType = new MoltenFluidType(p, s, f);
-                fluidType.setFogColor(new Color(fogColor, false).asVectorF());
-                fluidType.setFogDistance(fogDistance);
                 //fluidType.TintColor = fogColor;
                 return fluidType;
             };
         }
-
-        //@Override
-        //public int getTintColor(FluidState state, BlockAndTintGetter world, BlockPos pos) { return TintColor; }
 
         @Override
         public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {

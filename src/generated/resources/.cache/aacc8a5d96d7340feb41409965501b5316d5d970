@@ -1,4 +1,4 @@
-// 1.20.1	2023-08-05T01:48:28.705624354	Registrate Provider for fluidactions [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-08-09T23:49:21.309683049	Registrate Provider for fluidactions [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 f331857f4c635f3a3f432b5c97fc892a70075908 assets/fluidactions/blockstates/molten_aluminum.json
 d1c70c990ee2d219eb0a9f261e7ff9999ea13cc0 assets/fluidactions/blockstates/molten_andesite.json
 029acfe965209a699095eb9dd1e8181e7dd12c44 assets/fluidactions/blockstates/molten_andesite_alloy.json
@@ -109,7 +109,7 @@ ab0f73d54e9feec9cbcd64a20a9cc19e21428cce assets/fluidactions/models/item/molten_
 0e71f1d3ecfad4be5cdafa9efd06eae18bb23aa7 assets/fluidactions/models/item/molten_tin_bucket.json
 50bd71b83aa467476e86a06d25f32e330b0b63ae assets/fluidactions/models/item/molten_uranium_bucket.json
 878490c7f9e3388123810cb6fb3b45eb31c11894 assets/fluidactions/models/item/molten_zinc_bucket.json
-57d5cfdc9e4292451ac69437deb46eb2aa799250 data/fluidactions/tags/fluids/fluid_interactions_exclusion.json
+f661999cafdc03489c5509e0bbe6cb76b45e0597 data/fluidactions/tags/fluids/fluid_interactions_exclusion.json
 8cb3b77c8cb8adc3ec708d50620106c235ae4bb0 data/fluidactions/tags/items/lava_resistant.json
 a07023d973aa85b0106936823ba0a333091d6a8f data/forge/tags/fluids/molten_aluminum.json
 bd0dfd97885e02412830ac4feb335085cb597106 data/forge/tags/fluids/molten_andesite.json
