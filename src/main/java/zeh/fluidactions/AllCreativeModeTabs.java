@@ -1,8 +1,7 @@
 package zeh.fluidactions;
 
-import zeh.fluidactions.foundation.item.TagDependentIngredientItem;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 
@@ -15,65 +14,80 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.CreativeModeTab.TabVisibility;
 import net.minecraft.world.item.CreativeModeTab.Output;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 import it.unimi.dsi.fastutil.objects.*;
+import org.apache.commons.lang3.mutable.MutableObject;
+import zeh.fluidactions.foundation.data.Enroll;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(bus = Bus.MOD)
 public class AllCreativeModeTabs {
-    private static final DeferredRegister<CreativeModeTab> TAB_REGISTER =
+    private static final DeferredRegister<CreativeModeTab> REGISTER =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, FluidActions.ID);
 
-    public static final RegistryObject<CreativeModeTab> MAIN_TAB = TAB_REGISTER.register("base",
+    public static final RegistryObject<CreativeModeTab> BASE = REGISTER.register("fluidactions",
             () -> CreativeModeTab.builder()
                     .title(Component.literal(FluidActions.NAME))
                     .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
-                    .icon(Items.BUCKET::getDefaultInstance)
+                    .icon(() -> Items.BUCKET.getDefaultInstance())
                     .displayItems(new RegistrateDisplayItemsGenerator(true))
                     .build());
 
     public static void register(IEventBus modEventBus) {
-        TAB_REGISTER.register(modEventBus);
+        REGISTER.register(modEventBus);
     }
 
-    public static CreativeModeTab getBaseTab() {
-        return MAIN_TAB.get();
-    }
 
-    public static class RegistrateDisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenerator {
+    private static class RegistrateDisplayItemsGenerator implements CreativeModeTab.DisplayItemsGenerator {
+        private static final Predicate<Item> IS_ITEM_3D_PREDICATE;
 
-        private final boolean mainTab;
-
-        public RegistrateDisplayItemsGenerator(boolean mainTab) {
-            this.mainTab = mainTab;
+        static {
+            MutableObject<Predicate<Item>> isItem3d = new MutableObject<>(item -> false);
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+                isItem3d.setValue(item -> {
+                    ItemRenderer itemRenderer = Minecraft.getInstance()
+                            .getItemRenderer();
+                    BakedModel model = itemRenderer.getModel(new ItemStack(item), null, null, 0);
+                    return model.isGui3d();
+                });
+            });
+            IS_ITEM_3D_PREDICATE = isItem3d.getValue();
         }
+
+        @OnlyIn(Dist.CLIENT)
+        private static Predicate<Item> makeClient3dItemPredicate() {
+            return item -> {
+                ItemRenderer itemRenderer = Minecraft.getInstance()
+                        .getItemRenderer();
+                BakedModel model = itemRenderer.getModel(new ItemStack(item), null, null, 0);
+                return model.isGui3d();
+            };
+        }
+
+        private final boolean addItems;
+
+        public RegistrateDisplayItemsGenerator(boolean addItems) {
+            this.addItems = addItems;
+        }
+
         private static Predicate<Item> makeExclusionPredicate() {
             Set<Item> exclusions = new ReferenceOpenHashSet<>();
 
             List<ItemProviderEntry<?>> simpleExclusions = List.of(
-
-            );
-
-            List<ItemEntry<TagDependentIngredientItem>> tagDependentExclusions = List.of(
-
             );
 
             for (ItemProviderEntry<?> entry : simpleExclusions) {
                 exclusions.add(entry.asItem());
-            }
-
-            for (ItemEntry<TagDependentIngredientItem> entry : tagDependentExclusions) {
-                TagDependentIngredientItem item = entry.get();
-                if (item.shouldHide()) {
-                    exclusions.add(entry.asItem());
-                }
             }
 
             return exclusions::contains;
@@ -88,9 +102,13 @@ public class AllCreativeModeTabs {
             Map<ItemProviderEntry<?>, ItemProviderEntry<?>> simpleAfterOrderings = Map.of(
             );
 
-            simpleBeforeOrderings.forEach((entry, otherEntry) -> orderings.add(ItemOrdering.before(entry.asItem(), otherEntry.asItem())));
+            simpleBeforeOrderings.forEach((entry, otherEntry) -> {
+                orderings.add(ItemOrdering.before(entry.asItem(), otherEntry.asItem()));
+            });
 
-            simpleAfterOrderings.forEach((entry, otherEntry) -> orderings.add(ItemOrdering.after(entry.asItem(), otherEntry.asItem())));
+            simpleAfterOrderings.forEach((entry, otherEntry) -> {
+                orderings.add(ItemOrdering.after(entry.asItem(), otherEntry.asItem()));
+            });
 
             return orderings;
         }
@@ -99,9 +117,12 @@ public class AllCreativeModeTabs {
             Map<Item, Function<Item, ItemStack>> factories = new Reference2ReferenceOpenHashMap<>();
 
             Map<ItemProviderEntry<?>, Function<Item, ItemStack>> simpleFactories = Map.of(
+
             );
 
-            simpleFactories.forEach((entry, factory) -> factories.put(entry.asItem(), factory));
+            simpleFactories.forEach((entry, factory) -> {
+                factories.put(entry.asItem(), factory);
+            });
 
             return item -> {
                 Function<Item, ItemStack> factory = factories.get(item);
@@ -118,38 +139,44 @@ public class AllCreativeModeTabs {
             Map<ItemProviderEntry<?>, TabVisibility> simpleVisibilities = Map.of(
             );
 
-            simpleVisibilities.forEach((entry, factory) -> visibilities.put(entry.asItem(), factory));
+            simpleVisibilities.forEach((entry, factory) -> {
+                visibilities.put(entry.asItem(), factory);
+            });
 
             return item -> {
                 TabVisibility visibility = visibilities.get(item);
-                return Objects.requireNonNullElse(visibility, TabVisibility.PARENT_AND_SEARCH_TABS);
+                if (visibility != null) {
+                    return visibility;
+                }
+                return TabVisibility.PARENT_AND_SEARCH_TABS;
             };
         }
 
         @Override
-        public void accept(CreativeModeTab.ItemDisplayParameters pParameters, Output output) {
-            ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+        public void accept(CreativeModeTab.ItemDisplayParameters parameters, Output output) {
             Predicate<Item> exclusionPredicate = makeExclusionPredicate();
             List<ItemOrdering> orderings = makeOrderings();
             Function<Item, ItemStack> stackFunc = makeStackFunc();
             Function<Item, TabVisibility> visibilityFunc = makeVisibilityFunc();
-            RegistryObject<CreativeModeTab> tab = MAIN_TAB;
 
             List<Item> items = new LinkedList<>();
-            items.addAll(collectItems(tab, itemRenderer, true, exclusionPredicate));
-            items.addAll(collectBlocks(tab, exclusionPredicate));
-            items.addAll(collectItems(tab, itemRenderer, false, exclusionPredicate));
+            if (addItems) {
+                items.addAll(collectItems(exclusionPredicate.or(IS_ITEM_3D_PREDICATE.negate())));
+            }
+            items.addAll(collectBlocks(exclusionPredicate));
+            if (addItems) {
+                items.addAll(collectItems(exclusionPredicate.or(IS_ITEM_3D_PREDICATE)));
+            }
 
             applyOrderings(items, orderings);
             outputAll(output, items, stackFunc, visibilityFunc);
         }
 
-        private List<Item> collectBlocks(RegistryObject<CreativeModeTab> tab, Predicate<Item> exclusionPredicate) {
+        private List<Item> collectBlocks(Predicate<Item> exclusionPredicate) {
             List<Item> items = new ReferenceArrayList<>();
             for (RegistryEntry<Block> entry : FluidActions.REGISTRATE.getAll(Registries.BLOCK)) {
-                if (!FluidActions.REGISTRATE.isInCreativeTab(entry, tab))
-                    continue;
-                Item item = entry.get().asItem();
+                Item item = entry.get()
+                        .asItem();
                 if (item == Items.AIR)
                     continue;
                 if (!exclusionPredicate.test(item))
@@ -159,21 +186,11 @@ public class AllCreativeModeTabs {
             return items;
         }
 
-        private List<Item> collectItems(RegistryObject<CreativeModeTab> tab, ItemRenderer itemRenderer, boolean special,
-                                        Predicate<Item> exclusionPredicate) {
+        private List<Item> collectItems(Predicate<Item> exclusionPredicate) {
             List<Item> items = new ReferenceArrayList<>();
-
-            if (!mainTab)
-                return items;
-
             for (RegistryEntry<Item> entry : FluidActions.REGISTRATE.getAll(Registries.ITEM)) {
-                if (!FluidActions.REGISTRATE.isInCreativeTab(entry, tab))
-                    continue;
                 Item item = entry.get();
                 if (item instanceof BlockItem)
-                    continue;
-                BakedModel model = itemRenderer.getModel(new ItemStack(item), null, null, 0);
-                if (model.isGui3d() != special)
                     continue;
                 if (!exclusionPredicate.test(item))
                     items.add(item);
@@ -219,7 +236,7 @@ public class AllCreativeModeTabs {
 
             public enum Type {
                 BEFORE,
-                AFTER
+                AFTER;
             }
         }
     }

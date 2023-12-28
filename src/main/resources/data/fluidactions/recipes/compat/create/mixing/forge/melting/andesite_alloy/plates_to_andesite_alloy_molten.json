@@ -1,0 +1,10 @@
+{
+    "conditions": [
+        { "type": "forge:mod_loaded", "modid": "create" },
+        { "type": "forge:not",  "value":{ "type": "forge:tag_empty", "tag": "forge:plates/andesite_alloy" }}
+    ],
+    "type": "create:mixing",
+    "heatRequirement": "heated",
+    "ingredients": [{ "tag": "forge:plates/andesite_alloy" }],
+    "results": [{ "amount": 90, "fluid": "fluidactions:molten_andesite_alloy" }]
+}

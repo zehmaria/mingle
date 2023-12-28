@@ -1,0 +1,10 @@
+{
+    "conditions": [
+        { "type": "forge:mod_loaded", "modid": "create" },
+        { "type": "forge:not",  "value":{ "type": "forge:tag_empty", "tag": "forge:storage_blocks/constantan" }}
+    ],
+    "type": "create:mixing",
+    "heatRequirement": "heated",
+    "ingredients": [{ "tag": "forge:storage_blocks/constantan" }],
+    "results": [{ "amount": 810, "fluid": "fluidactions:molten_constantan" }]
+}

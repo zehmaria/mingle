@@ -1,0 +1,10 @@
+{
+    "conditions": [
+        { "type": "forge:mod_loaded", "modid": "create" },
+        { "type": "forge:not",  "value":{ "type": "forge:tag_empty", "tag": "forge:ingots/gold" }}
+    ],
+    "type": "create:mixing",
+    "heatRequirement": "heated",
+    "ingredients": [{ "tag": "forge:ingots/gold" }],
+    "results": [{ "amount": 90, "fluid": "fluidactions:molten_gold" }]
+}

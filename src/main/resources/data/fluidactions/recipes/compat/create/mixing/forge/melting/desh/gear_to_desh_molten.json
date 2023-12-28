@@ -1,0 +1,10 @@
+{
+    "conditions": [
+        { "type": "forge:mod_loaded", "modid": "create" },
+        { "type": "forge:not",  "value":{ "type": "forge:tag_empty", "tag": "forge:gears/desh" }}
+    ],
+    "type": "create:mixing",
+    "heatRequirement": "heated",
+    "ingredients": [{ "tag": "forge:gears/desh" }],
+    "results": [{ "amount": 360, "fluid": "fluidactions:molten_desh" }]
+}

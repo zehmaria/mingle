@@ -17,7 +17,12 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegistryObject;
 
+import org.jetbrains.annotations.Nullable;
+
 public class Enroll extends AbstractRegistrate<Enroll> {
+
+    private static final Map<RegistryEntry<?>, RegistryObject<CreativeModeTab>> TAB_LOOKUP = new IdentityHashMap<>();
+    private RegistryObject<CreativeModeTab> currentTab;
 
     protected Enroll(String modid) {
         super(modid);
@@ -27,16 +32,23 @@ public class Enroll extends AbstractRegistrate<Enroll> {
         return new Enroll(modid);
     }
 
+    public static boolean isInCreativeTab(RegistryEntry<?> entry, RegistryObject<CreativeModeTab> tab) {
+        return TAB_LOOKUP.get(entry) == tab;
+    }
+
+    @Nullable
+    public Enroll setCreativeTab(RegistryObject<CreativeModeTab> tab) {
+        currentTab = tab;
+        return self();
+    }
+
+    public RegistryObject<CreativeModeTab> getCreativeTab() {
+        return currentTab;
+    }
+
     @Override
     public Enroll registerEventListeners(IEventBus bus) {
         return super.registerEventListeners(bus);
-    }
-
-    private static Map<RegistryEntry<?>, RegistryObject<CreativeModeTab>> tabLookup = new IdentityHashMap<>();
-    private RegistryObject<CreativeModeTab> currentTab;
-
-    public boolean isInCreativeTab(RegistryEntry<?> entry, RegistryObject<CreativeModeTab> tab) {
-        return tabLookup.get(entry) == tab;
     }
 
     @Override
@@ -44,7 +56,7 @@ public class Enroll extends AbstractRegistrate<Enroll> {
                                                        Builder<R, T, ?, ?> builder, NonNullSupplier<? extends T> creator,
                                                        NonNullFunction<RegistryObject<T>, ? extends RegistryEntry<T>> entryFactory) {
         RegistryEntry<T> entry = super.accept(name, type, builder, creator, entryFactory);
-        if (currentTab != null) tabLookup.put(entry, currentTab);
+        if (currentTab != null) TAB_LOOKUP.put(entry, currentTab);
         return entry;
     }
 

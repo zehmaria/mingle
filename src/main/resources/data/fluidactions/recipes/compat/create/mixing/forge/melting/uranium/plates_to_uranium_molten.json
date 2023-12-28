@@ -1,0 +1,10 @@
+{
+    "conditions": [
+        { "type": "forge:mod_loaded", "modid": "create" },
+        { "type": "forge:not",  "value":{ "type": "forge:tag_empty", "tag": "forge:plates/uranium" }}
+    ],
+    "type": "create:mixing",
+    "heatRequirement": "heated",
+    "ingredients": [{ "tag": "forge:plates/uranium" }],
+    "results": [{ "amount": 90, "fluid": "fluidactions:molten_uranium" }]
+}
