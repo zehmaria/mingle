@@ -160,10 +160,7 @@ public class AllFluidsInteractions {
         }
         public void fluidMix(Level level, BlockPos pos, BlockState state) {
             level.setBlockAndUpdate(pos, state);
-            Objects.requireNonNull(
-                    Objects.requireNonNull(Minecraft.getInstance().getSingleplayerServer())
-                            .getLevel(level.dimension())
-            ).sendParticles(
+            level.getServer().getLevel(level.dimension()).sendParticles(
                     ParticleTypes.LARGE_SMOKE,
                     (double) pos.getX() + 0.5d,
                     (double) pos.getY() + 1.0d,
