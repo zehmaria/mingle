@@ -1,149 +1,126 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net/' }
-        mavenCentral()
-        jcenter()
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-        maven { url = 'https://maven.parchmentmc.org' }
-    }
-    dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:${forgegradle_version}"
-        classpath "org.parchmentmc:librarian:${librarian_version}"
-    }
-}
-
 plugins {
-    id 'com.matthewprenger.cursegradle' version "${cursegradle_version}"
+    id 'idea'
+    id 'net.neoforged.gradle.userdev' version '7.0.145' //https://projects.neoforged.net/neoforged/neogradle
+    id 'java-library'
 }
 
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'idea'
+tasks.named('wrapper', Wrapper).configure {
+    //Define wrapper values here so as to not have to always do so when updating gradlew.properties
+    gradleVersion = '8.8'
+    distributionType = Wrapper.DistributionType.ALL
+}
 
-jarJar.enable()
+idea {
+    module {
+        //Exclude directories from being managed
+        for (String excludeDirName in ["runs", "out", "logs", "gradle"]) {
+            //excludeDirs.add(new File(projectDir, excludeDirName))
+            excludeDirs.add(file(excludeDirName))
+        }
+        //Tell IDEA to always download sources/javadoc artifacts from maven.
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
 
-group = mod_author + '.' + mod_id // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = mod_id + "-forge"
 version = minecraft_version + '-' + mod_version
+group = mod_author + '.' + mod_id // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = mod_id + "-neoforge"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(java_version)
 
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
-    if (Boolean.parseBoolean(project.use_parchment)) {
-        mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
-    } else {
-        mappings channel: 'official', version: "${minecraft_version}"
+minecraft.accessTransformers.file file('src/main/resources/META-INF/accesstransformer.cfg')
+
+sourceSets.main.resources {
+    srcDirs += 'src/generated/resources'
+    exclude '.cache'
+}
+
+def version_replaces = [
+        "version"    : mod_version,
+        "mc_version": minecraft_version_range,
+        "neoforge_version": neoforge_version_range,
+        "loader_version": loader_version_range
+]
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+    inputs.properties(version_replaces)
+    filesMatching("META-INF/neoforge.mods.toml") {
+        expand version_replaces
+    }
+    exclude ".cache"
+}
+
+runs {
+    configureEach {
+        workingDirectory project.file("run/${it.name}")
+        //systemProperty 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+        //systemProperty 'forge.logging.console.level', 'debug'
+        modSource project.sourceSets.main
     }
 
-    runs {
-        client = {
-            workingDirectory project.file('run')
-            property 'forge.logging.console.level', 'info'
-            mods {
-                fluidactions {
-                    source sourceSets.main
-                }
-            }
-        }
-        server = {
-            workingDirectory project.file('run')
-            property 'forge.logging.console.level', 'info'
-            mods {
-                fluidactions {
-                    source sourceSets.main
-                }
-            }
-        }
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
-            args '--mod', 'fluidactions', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+    client
 
-            mods {
-                fluidactions {
-                    source sourceSets.main
-                }
-            }
-        }
+    server {
+        programArgument '--nogui'
+    }
+
+    data {
+        programArguments.addAll '--mod', "mingle", '--all', '--output', file('src/generated/resources/').getAbsolutePath(),
+                '--existing', file('src/main/resources/').getAbsolutePath()
     }
 }
 
 repositories {
-    maven {
-        // Location of the maven for mixed mappings, Registrate, and Flywheel
-        name 'tterrag maven'
-        url 'https://maven.tterrag.com'
-    }
-    maven {
-        // location of the maven that hosts JEI files since January 2023
-        // location of the maven for Vazkii's mods
-        name = "Jared's maven"
-        url = "https://maven.blamejared.com/"
-    }
-    maven {
-        url 'https://www.cursemaven.com'
-        content {
-            includeGroup "curse.maven"
-        }
-    }
 
-    mavenLocal()
-    flatDir {
-        dirs 'libs'
-    }
 }
+
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    implementation "net.neoforged:neoforge:${neoforge_version}"
+}
 
-    jarJar("com.tterrag.registrate:Registrate:${registrate_version}") {
-        jarJar.ranged(it, '[MC1.19.3-1.1.10,)')
+//Minimize/optimize all png files, requires optipng on the PATH
+// Credits: BrainStone
+void minimizePNGFile(File file) {
+    long size = file.length()
+    exec {
+        executable "optipng"
+        args "-q", "-o7", "-zm1-9", "-strip", "all", file
     }
-
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
-
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}-forge:${jei_version}")
+    long newSize = file.length()
+    if (newSize < size) {
+        System.out.format("Reduced File size of %s from %d bytes to %d bytes (reduced by %.2f%%)\n",
+                file, size, newSize, ((double) (size - newSize)) / ((double) size) * 100.0)
+    }
 }
 
-sourceSets.main.resources {
-    srcDir 'src/generated/resources'
-    exclude '.cache/'
+task optimizePng {
+    def pngPatterns = ["**/*.png"]
+    doLast {
+        //Ensure the logo is minimized (we add this file to each jar)
+        minimizePNGFile(file("${projectDir}/logo.png"))
+        //Minimize any PNGs in the source sets
+        for (dir in sourceSets.main.resources.srcDirs) {
+            fileTree(dir: dir, includes: pngPatterns).each { minimizePNGFile(it) }
+        }
+    }
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                "Specification-Title"     : mod_id,
+                "Specification-Vendor"    : mod_author,
+                "Specification-Version"   : mod_version,
+                "Implementation-Title"    : project.jar.archiveBaseName,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : mod_author,
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
 }
 
 compileJava {
     options.compilerArgs = ['-Xdiags:verbose']
 }
-
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : mod_id,
-                "Specification-Vendor"    : mod_author,
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                'Implementation-Title'    : project.jar.archiveBaseName,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : mod_author,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ", TimeZone.getTimeZone("UTC"))
-        ])
-    }
-}
-
-void addLicense(jarTask) {
-    jarTask.from('LICENSE') {
-        rename { "${it}_${project.archivesBaseName}" }
-    }
-}
-
-jar.finalizedBy('reobfJar')
-tasks.jarJar.finalizedBy('reobfJarJar')
-
-addLicense(jar)
-addLicense(tasks.jarJar)

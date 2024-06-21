@@ -1,0 +1,10 @@
+{
+  "neoforge:conditions": [{ "type": "neoforge:mod_loaded", "modid": "create" }],
+  "type": "create:mixing",
+  "heatRequirement": "none",
+  "ingredients": [
+    { "amount": 1000, "fluid": "mingle:molten_andesite" },
+    { "amount": 10, "fluid": "mingle:molten_iron" }
+  ],
+  "results": [{ "amount": 100, "fluid": "mingle:molten_andesite_alloy" }]
+}

@@ -1,0 +1,5 @@
+{
+  "parent": "neoforge:item/bucket",
+  "fluid": "mingle:molten_spirit",
+  "loader": "neoforge:fluid_container"
+}

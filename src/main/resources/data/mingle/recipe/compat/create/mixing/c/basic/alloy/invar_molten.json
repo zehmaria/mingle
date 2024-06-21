@@ -1,0 +1,10 @@
+{
+  "neoforge:conditions": [{ "type": "neoforge:mod_loaded", "modid": "create" }],
+  "type": "create:mixing",
+  "heatRequirement": "none",
+  "ingredients": [
+    { "amount": 200, "fluid": "mingle:molten_iron" },
+    { "amount": 100, "fluid": "mingle:molten_nickel" }
+  ],
+  "results": [{ "amount": 300, "fluid": "mingle:molten_invar" }]
+}

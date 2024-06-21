@@ -1,0 +1,10 @@
+{
+  "neoforge:conditions": [{ "type": "neoforge:mod_loaded", "modid": "create" }],
+  "type": "create:mixing",
+  "heatRequirement": "none",
+  "ingredients": [
+    { "amount": 500, "fluid": "mingle:molten_gold" },
+    { "amount": 500, "fluid": "mingle:molten_silver" }
+  ],
+  "results": [{ "amount": 1000, "fluid": "mingle:molten_electrum" }]
+}

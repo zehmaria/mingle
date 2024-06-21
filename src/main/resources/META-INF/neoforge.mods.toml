@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="${loader_version}"
+issueTrackerURL="https://github.com/zehmaria/mingle/issues"
+license="MIT"
+
+[[mods]]
+    modId="mingle"
+    version="${version}"
+    displayName="Mingle"
+    displayURL="https://github.com/zehmaria/mingle"
+	authors="zeh_maria"
+    logoFile="logo.png"
+    description="Adds Fluids and related interactions."
+
+[[dependencies.mingle]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neoforge_version}"
+    side="BOTH"
+
+[[dependencies.mingle]]
+    modId="minecraft"
+    type="required"
+    versionRange="${mc_version}"
+    side="BOTH"

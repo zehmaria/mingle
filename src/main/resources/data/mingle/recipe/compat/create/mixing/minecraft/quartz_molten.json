@@ -1,0 +1,13 @@
+{
+  "neoforge:conditions": [{ "type": "neoforge:mod_loaded", "modid": "create" }],
+  "type": "create:mixing",
+  "heatRequirement": "none",
+  "ingredients": [
+    { "amount": 1000, "fluid": "minecraft:lava" },
+    { "tag": "mingle:quartz" }
+  ],
+  "results": [
+    { "amount": 1000, "fluid": "mingle:molten_quartz" },
+    { "item": "minecraft:obsidian" }
+  ]
+}

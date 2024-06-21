@@ -1,0 +1,10 @@
+{
+    "neoforge:conditions": [
+        { "type": "neoforge:mod_loaded", "modid": "create" },
+        { "type": "neoforge:not",  "value":{ "type": "neoforge:tag_empty", "tag": "c:wires/zinc" }}
+    ],
+    "type": "create:mixing",
+    "heatRequirement": "heated",
+    "ingredients": [{ "tag": "c:wires/zinc" }],
+    "results": [{ "amount": 45, "fluid": "mingle:molten_zinc" }]
+}

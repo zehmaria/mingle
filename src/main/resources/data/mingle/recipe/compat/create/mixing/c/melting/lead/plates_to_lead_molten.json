@@ -1,0 +1,10 @@
+{
+    "neoforge:conditions": [
+        { "type": "neoforge:mod_loaded", "modid": "create" },
+        { "type": "neoforge:not",  "value":{ "type": "neoforge:tag_empty", "tag": "c:plates/lead" }}
+    ],
+    "type": "create:mixing",
+    "heatRequirement": "heated",
+    "ingredients": [{ "tag": "c:plates/lead" }],
+    "results": [{ "amount": 90, "fluid": "mingle:molten_lead" }]
+}
