@@ -1,4 +1,4 @@
-// 1.21	2024-06-20T23:22:55.726762824	Tags for minecraft:fluid mod id mingle
+// 1.21	2024-06-22T03:34:01.088193485	Tags for minecraft:fluid mod id mingle
 152873f37d59aec36153537c8e7d2fdd27df9596 data/c/tags/fluid/molten_aluminum.json
 8d250f121575c043fd8a6a426bd15316cadf6884 data/c/tags/fluid/molten_andesite.json
 055fb52bfd0e1d1d74b6f8483cc377f04aa202bb data/c/tags/fluid/molten_andesite_alloy.json
@@ -35,4 +35,4 @@ d4ee0c4ea6caf5bc7ffd6397dfacf54936103497 data/c/tags/fluid/molten_slime.json
 62e1af7950782205d30d33eee214db225ac372e9 data/c/tags/fluid/molten_tin.json
 ddc1b09ffdf33f9d496fe5a0df1769cd57f502c8 data/c/tags/fluid/molten_uranium.json
 3316eeaec915abce4fa31392e8dff2184b678e3e data/c/tags/fluid/molten_zinc.json
-e72d1ab7a700a18b58af4953751f40c7f31f02c3 data/mingle/tags/fluid/fluid_interactions_exclusion.json
+70928f256c2de21e2b37371a19405298c164d2de data/mingle/tags/fluid/waste_mixing.json

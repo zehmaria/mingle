@@ -8,7 +8,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import zeh.mingle.AllFluids;
 import zeh.mingle.Mingle;
-import zeh.mingle.registry.*;
+import zeh.mingle.registry.Interaction;
+import zeh.mingle.registry.Mingled;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -22,16 +23,16 @@ public class MDatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProvi
         super(output, provider, BUILDER, Set.of(Mingle.ID));
     }
 
-    //public static final ResourceKey<Interactions> OAK = ResourceKey.create(Interactions.KEY, ResourceLocation.fromNamespaceAndPath(Mingle.ID, "test2"));
-
     public static void bootstrap(BootstrapContext<Interaction> context) {
 
         Mingled.createKey("molten_copper")
                 .setFluid(AllFluids.INSTANCE.COPPER.STILL.get())
                 .setSlag(Blocks.COBBLESTONE)
-                .addWith(Mingled.with(true, Mingled.block("#c:storage_blocks/iron"), Mingled.consumeWater()))
-                .addWith(Mingled.with(true, Mingled.consumeLava()))
-                .addFrom(Mingled.from(Mingled.block("#c:storage_blocks/iron"), Mingled.consumeLava()))
+                .addWith(Mingled.with(true, Mingled.consumeWater(), "#c:storage_blocks/iron"))
+                .addWith(Mingled.with(false, Mingled.consumeLava()))
+
+                .addFrom(Mingled.from(Mingled.block("#c:storage_blocks/raw_iron"), Mingled.consumeLava()))
+
                 .build(context);
 
     }

@@ -19,8 +19,8 @@ public class MItemModelsProvider extends ItemModelProvider {
     protected void registerModels() {
         for (AllFluids.INSTANCE entry : AllFluids.INSTANCE.values()) {
             withExistingParent(entry.BUCKET_ITEM.getId().getPath(), ResourceLocation.fromNamespaceAndPath(NeoForgeVersion.MOD_ID, "item/bucket"))
-                        .customLoader(DynamicFluidContainerModelBuilder::begin)
-                        .fluid(entry.STILL.get());
+                    .customLoader(DynamicFluidContainerModelBuilder::begin)
+                    .fluid(entry.STILL.get());
         }
     }
 

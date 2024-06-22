@@ -2,7 +2,6 @@ package zeh.mingle;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
-
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -23,12 +22,14 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
-
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.common.SoundActions;
@@ -38,11 +39,10 @@ import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+import zeh.mingle.foundation.utility.Color;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-
-import zeh.mingle.foundation.utility.Color;
 
 public final class AllFluids {
 
@@ -76,7 +76,7 @@ public final class AllFluids {
         BLOCKS.register(bus);
         ITEMS.register(bus);
         for (AllFluids.INSTANCE entry : AllFluids.INSTANCE.values()) {
-            if (!entry.init()) return; // Makes sure the fluids are registered on the right time.
+            if (!entry.init()) return; // Makes sure the fluids are registered at the right time.
         }
     }
 
@@ -131,8 +131,7 @@ public final class AllFluids {
         ELEMENTIUM("molten_elementium", "Molten Elementium", 0xffea3298),
         TERRASTEEL("molten_terrasteel", "Molten Terrasteel", 0xff3fca00),
         SPIRIT("molten_spirit", "Molten Spirit", 0xff7ea37e),
-        ESSENCE("molten_essence", "Molten Essence", 0xff6ea31e)
-        ;
+        ESSENCE("molten_essence", "Molten Essence", 0xff6ea31e);
 
         public final DeferredHolder<Fluid, FlowingFluid> STILL;
         public final DeferredHolder<Fluid, FlowingFluid> FLOWING;
@@ -189,7 +188,10 @@ public final class AllFluids {
                     .levelDecreasePerBlock(3).tickRate(25).slopeFindDistance(1).explosionResistance(100f)
                     .block(BLOCK).bucket(BUCKET_ITEM);
         }
-        public boolean init() { return true; }
+
+        public boolean init() {
+            return true;
+        }
     }
 
     public static class MoltenFluidType extends FluidType {
@@ -221,17 +223,30 @@ public final class AllFluids {
             consumer.accept(new IClientFluidTypeExtensions() {
 
                 @Override
-                public @NotNull ResourceLocation getStillTexture() { return stillTexture; }
-                @Override
-                public @NotNull ResourceLocation getFlowingTexture() { return flowingTexture; }
-                @Override
-                public ResourceLocation getOverlayTexture() { return overlayTexture; }
-                @Nullable
-                @Override
-                public ResourceLocation getRenderOverlayTexture(@NotNull Minecraft mc) { return renderOverlayTexture; }
+                public @NotNull ResourceLocation getStillTexture() {
+                    return stillTexture;
+                }
 
                 @Override
-                public int getTintColor() { return color; }
+                public @NotNull ResourceLocation getFlowingTexture() {
+                    return flowingTexture;
+                }
+
+                @Override
+                public ResourceLocation getOverlayTexture() {
+                    return overlayTexture;
+                }
+
+                @Nullable
+                @Override
+                public ResourceLocation getRenderOverlayTexture(@NotNull Minecraft mc) {
+                    return renderOverlayTexture;
+                }
+
+                @Override
+                public int getTintColor() {
+                    return color;
+                }
 
                 @Override
                 public @NotNull Vector3f modifyFogColor(@NotNull Camera camera, float partialTick, @NotNull ClientLevel level,
@@ -256,7 +271,7 @@ public final class AllFluids {
 
         @Override
         public boolean move(@NotNull FluidState state, LivingEntity entity, @NotNull Vec3 movementVector, double gravity) {
-            if(!entity.isOnFire()) entity.setRemainingFireTicks(4);
+            if (!entity.isOnFire()) entity.setRemainingFireTicks(4);
             else entity.setRemainingFireTicks(20 * 4);
             entity.setSpeed(0.001f);
             entity.setDeltaMovement(entity.getDeltaMovement().scale(0.001f));
@@ -266,7 +281,7 @@ public final class AllFluids {
         @Override
         public void setItemMovement(ItemEntity entity) {
             if (entity.getItem().is(AllTags.AllItemTags.LAVA_RESISTANT.tag)) return;
-            entity.playSound(SoundEvents.LAVA_EXTINGUISH, 0.5f,2.1f);
+            entity.playSound(SoundEvents.LAVA_EXTINGUISH, 0.5f, 2.1f);
             entity.kill();
         }
 

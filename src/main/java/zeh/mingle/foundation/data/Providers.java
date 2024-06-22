@@ -28,7 +28,5 @@ public class Providers {
         generator.addProvider(event.includeServer(), new MItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
 
         generator.addProvider(event.includeServer(), new MDatapackBuiltinEntriesProvider(output, provider));
-        //generator.addProvider(event.includeServer(), new MInteractionsProvider(output));
-
     }
 }

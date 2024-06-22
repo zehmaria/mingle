@@ -69,7 +69,7 @@ public class Mingled {
     }
 
     @SuppressWarnings("unused")
-    public static InteractedWith with(boolean requireSource, InteractSet replace, InteractSet target) {
+    public static InteractedWith with(boolean requireSource, InteractSet target, String replace) {
         return new InteractedWith(requireSource, replace, target);
     }
 
@@ -85,7 +85,7 @@ public class Mingled {
     }
 
     @SuppressWarnings("unused")
-    public static InteractSet block(String block, InteractSet replace) {
+    public static InteractSet block(String block, String replace) {
         return new InteractSet(block, replace);
     }
 
@@ -95,18 +95,18 @@ public class Mingled {
     }
 
     @SuppressWarnings("unused")
-    public static InteractSet fluid(String fluid, boolean requireSource, InteractSet replace) {
+    public static InteractSet fluid(String fluid, boolean requireSource, String replace) {
         return new InteractSet(fluid, requireSource, replace);
     }
 
     @SuppressWarnings("unused")
     public static InteractSet consumeLava() {
-        return new InteractSet("minecraft:lava", true, new InteractSet("minecraft:obsidian"));
+        return new InteractSet("minecraft:lava", true, "minecraft:obsidian");
     }
 
     @SuppressWarnings("unused")
     public static InteractSet consumeWater() {
-        return new InteractSet("minecraft:water", true, new InteractSet("minecraft:air"));
+        return new InteractSet("minecraft:water", true, "minecraft:air");
     }
 
 }

@@ -15,7 +15,7 @@ public class MBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         for (AllFluids.INSTANCE entry : AllFluids.INSTANCE.values()) {
-            if(entry.FLUID_TYPE.get() instanceof AllFluids.MoltenFluidType fluidType) {
+            if (entry.FLUID_TYPE.get() instanceof AllFluids.MoltenFluidType fluidType) {
                 simpleBlock(entry.BLOCK.get(), models().getBuilder(entry.BLOCK.getId().getPath()).texture("particle", fluidType.stillTexture));
             }
         }

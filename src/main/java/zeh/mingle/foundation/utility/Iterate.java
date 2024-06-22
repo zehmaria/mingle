@@ -1,19 +1,19 @@
 package zeh.mingle.foundation.utility;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+
 public class Iterate {
 
-    public static final boolean[] trueAndFalse = { true, false };
-    public static final boolean[] falseAndTrue = { false, true };
-    public static final int[] zeroAndOne = { 0, 1 };
-    public static final int[] positiveAndNegative = { 1, -1 };
+    public static final boolean[] trueAndFalse = {true, false};
+    public static final boolean[] falseAndTrue = {false, true};
+    public static final int[] zeroAndOne = {0, 1};
+    public static final int[] positiveAndNegative = {1, -1};
     public static final Direction[] directions = Direction.values();
     public static final Direction[] horizontalDirections = getHorizontals();
     public static final Axis[] axes = Axis.values();
@@ -29,12 +29,12 @@ public class Iterate {
     public static Direction[] directionsInAxis(Axis axis) {
         switch (axis) {
             case X:
-                return new Direction[] { Direction.EAST, Direction.WEST };
+                return new Direction[]{Direction.EAST, Direction.WEST};
             case Y:
-                return new Direction[] { Direction.UP, Direction.DOWN };
+                return new Direction[]{Direction.UP, Direction.DOWN};
             default:
             case Z:
-                return new Direction[] { Direction.SOUTH, Direction.NORTH };
+                return new Direction[]{Direction.SOUTH, Direction.NORTH};
         }
     }
 

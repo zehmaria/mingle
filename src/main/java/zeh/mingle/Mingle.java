@@ -1,5 +1,7 @@
 package zeh.mingle;
 
+import com.mojang.logging.LogUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -8,10 +10,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import org.slf4j.Logger;
-import com.mojang.logging.LogUtils;
-
-import net.minecraft.resources.ResourceLocation;
-
 import zeh.mingle.common.Configuration;
 import zeh.mingle.foundation.data.Providers;
 import zeh.mingle.registry.Interaction;
