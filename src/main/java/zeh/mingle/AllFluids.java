@@ -48,8 +48,8 @@ public final class AllFluids {
 
     private static final ResourceLocation OVERLAY = ResourceLocation.tryParse("block/water_overlay");
     private static final ResourceLocation RENDER_OVERLAY = ResourceLocation.tryParse("misc/underwater");
-    private static final ResourceLocation LIQUID = Mingle.asResource("block/fluid/molten_still");
-    private static final ResourceLocation LIQUID_FLOW = Mingle.asResource("block/fluid/molten_flow");
+    private static final ResourceLocation LIQUID = Mingle.as("block/fluid/molten_still");
+    private static final ResourceLocation LIQUID_FLOW = Mingle.as("block/fluid/molten_flow");
     private static final DispenseItemBehavior BUCKET_DISPENSE_BEHAVIOR = new DefaultDispenseItemBehavior() {
         @NotNull
         @Override

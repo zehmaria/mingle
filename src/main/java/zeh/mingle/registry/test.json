@@ -1,0 +1,44 @@
+{
+  "fluid": "mingle:molten_copper",
+  "slag": "minecraft:stone",
+  "interactions": [
+    {
+      "require_source": true,
+      "replace": {
+        "block": "#c:storage_blocks/iron"
+      },
+      "target": {
+        "fluid": "minecraft:water",
+        "require_source": true,
+        "replace": {
+          "block": "minecraft:air"
+        }
+      }
+    },
+    {
+      "require_source": true,
+      "target": {
+        "fluid": "minecraft:lava",
+        "require_source": true,
+        "replace": {
+          "block": "minecraft:obsidian"
+        }
+      }
+    }
+  ],
+  "replacement_for" : [
+    {
+      "target": {
+        "block": "#c:storage_blocks/raw_iron"
+      },
+      "interaction": {
+        "fluid": "minecraft:lava",
+        "require_source": true,
+        "replace": {
+          "block": "minecraft:obsidian"
+        }
+      }
+    }
+  ]
+
+}

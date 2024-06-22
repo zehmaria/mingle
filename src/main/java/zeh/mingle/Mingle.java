@@ -5,10 +5,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
@@ -16,9 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import zeh.mingle.common.Configuration;
 import zeh.mingle.foundation.data.Providers;
-import zeh.mingle.interactions.Interactions;
-import zeh.mingle.interactions.network.InteractionsPacket;
-import zeh.mingle.registry.DataRegistryTest;
+import zeh.mingle.registry.Interaction;
 
 @Mod(Mingle.ID)
 public class Mingle {
@@ -35,7 +31,7 @@ public class Mingle {
 
         Configuration.setup(modContainer);
 
-        modEventBus.addListener(DataRegistryTest::register);
+        modEventBus.addListener(Interaction::register);
         modEventBus.addListener(AllCreativeModeTabs::addCreative);
         modEventBus.addListener(Providers::generate);
         modEventBus.addListener(Mingle::init);
@@ -46,7 +42,6 @@ public class Mingle {
     }
 
     public static void init(final FMLCommonSetupEvent event) {
-        //event.enqueueWork(AllFluidsInteractions::registerFluidInteractions);
         event.enqueueWork(AllFluids::registerBucketDispenserBehavior);
     }
 
@@ -56,7 +51,7 @@ public class Mingle {
         }
     }
 
-    public static ResourceLocation asResource(String path) {
+    public static ResourceLocation as(String path) {
         return ResourceLocation.fromNamespaceAndPath(ID, path);
     }
 
