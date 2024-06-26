@@ -9,9 +9,11 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import org.slf4j.Logger;
 import zeh.mingle.common.Configuration;
 import zeh.mingle.foundation.data.Providers;
+import zeh.mingle.foundation.utility.Color;
 import zeh.mingle.registry.Interaction;
 
 @Mod(Mingle.ID)
@@ -35,12 +37,21 @@ public class Mingle {
         modEventBus.addListener(Mingle::init);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
+            modEventBus.addListener(Mingle::addBlockColors);
             modEventBus.addListener(Mingle::addItemColors);
         }
     }
 
     public static void init(final FMLCommonSetupEvent event) {
         event.enqueueWork(AllFluids::registerBucketDispenserBehavior);
+    }
+
+    public static void addBlockColors(RegisterColorHandlersEvent.Block event) {
+        for (AllFluids.INSTANCE entry : AllFluids.INSTANCE.values()) {
+            event.register((i, l, p, t) -> t == 0 ? entry.color :
+                    t == 1 ? Color.mixColors(entry.color, 0xff000000, 0.3f) :
+                    Color.mixColors(entry.color, 0xff000000, 0.6f), entry.SLAG_BLOCK.get());
+        }
     }
 
     public static void addItemColors(RegisterColorHandlersEvent.Item event) {

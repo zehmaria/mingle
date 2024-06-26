@@ -28,8 +28,8 @@ public class MLanguageProvider extends LanguageProvider {
         add(entry.FLUID_TYPE.get().getDescriptionId(), name);
         add(entry.BLOCK.get(), name);
         add(entry.BUCKET_ITEM.get(), name + " Bucket");
-        addTag(() -> ItemTags.create(Tags.Items.BUCKETS.location().withSuffix("/" + entry.id)), name + " Buckets");
-        TagKey<Fluid> key = TagKey.create(BuiltInRegistries.FLUID.key(), ResourceLocation.fromNamespaceAndPath("c", entry.id));
+        addTag(() -> ItemTags.create(Tags.Items.BUCKETS.location().withSuffix("/" + entry.name)), name + " Buckets");
+        TagKey<Fluid> key = TagKey.create(BuiltInRegistries.FLUID.key(), ResourceLocation.fromNamespaceAndPath("c", entry.name));
         addTag(() -> key, name);
     }
 

@@ -25,7 +25,7 @@ public class MItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider pProvider) {
         for (AllFluids.INSTANCE entry : AllFluids.INSTANCE.values()) {
-            TagKey<Item> key = TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.fromNamespaceAndPath("c", "buckets/" + entry.id));
+            TagKey<Item> key = TagKey.create(BuiltInRegistries.ITEM.key(), ResourceLocation.fromNamespaceAndPath("c", "buckets/" + entry.name));
             tag(key).add(entry.BUCKET_ITEM.get().asItem());
         }
     }

@@ -21,6 +21,7 @@ public class MItemModelsProvider extends ItemModelProvider {
             withExistingParent(entry.BUCKET_ITEM.getId().getPath(), ResourceLocation.fromNamespaceAndPath(NeoForgeVersion.MOD_ID, "item/bucket"))
                     .customLoader(DynamicFluidContainerModelBuilder::begin)
                     .fluid(entry.STILL.get());
+            withExistingParent(entry.slagId, modLoc("block/" + entry.name));
         }
     }
 

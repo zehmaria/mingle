@@ -1,10 +1,10 @@
 
 ##### Explanation 
 # 
-# before = requires a valid block or blockTag, or the String "ignore"
+# before = requires a valid name or blockTag, or the String "ignore"
 # molten = requires a valid fluid (non-tag), or else it ignores the whole interaction
-# after = requires a valid block or blockTag, or the String "ignore"
-# slag = requires a valid block or blockTag
+# after = requires a valid name or blockTag, or the String "ignore"
+# slag = requires a valid name or blockTag
 #
 # before + lava source = molten (consumes lava)
 # molten + water source = after (consumes water)

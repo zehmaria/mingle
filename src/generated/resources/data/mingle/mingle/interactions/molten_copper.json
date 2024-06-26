@@ -1,35 +1,119 @@
 {
-  "fluid": "mingle:molten_copper",
   "interactions": [
     {
-      "replace": "#c:storage_blocks/iron",
-      "require_source": true,
+      "fluid": {
+        "placed": "minecraft:lava",
+        "replace": "minecraft:obsidian",
+        "required": 0
+      },
       "target": {
-        "fluid": "minecraft:water",
-        "replace": "minecraft:air",
-        "require_source": true
+        "placed": "#c:storage_blocks/raw_copper",
+        "replace": "mingle:molten_copper"
       }
     },
     {
-      "require_source": false,
-      "target": {
-        "fluid": "minecraft:lava",
-        "replace": "minecraft:obsidian",
-        "require_source": true
-      }
-    }
-  ],
-  "replacement_for": [
-    {
-      "interaction": {
-        "fluid": "minecraft:lava",
-        "replace": "minecraft:obsidian",
-        "require_source": true
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "replace": "#c:storage_blocks/copper",
+        "required": 0
       },
       "target": {
-        "block": "#c:storage_blocks/raw_iron"
+        "placed": "@temperature<301",
+        "replace": "minecraft:air",
+        "required": 0
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "required": 0
+      },
+      "target": {
+        "placed": "minecraft:water",
+        "replace": "minecraft:cobblestone",
+        "required": 1
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "replace": "minecraft:cobblestone",
+        "required": 1
+      },
+      "target": {
+        "placed": "minecraft:water",
+        "replace": "minecraft:air",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "required": 2
+      },
+      "target": {
+        "placed": "minecraft:lava",
+        "replace": "minecraft:magma_block",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "replace": "mingle:molten_iron",
+        "required": 0
+      },
+      "target": {
+        "placed": "mingle:molten_gold",
+        "replace": "mingle:molten_iron",
+        "required": 0
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "replace": "mingle:molten_waste",
+        "required": 1
+      },
+      "target": {
+        "placed": "#mingle:waste_mixing",
+        "replace": "mingle:molten_waste",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "replace": "mingle:molten_waste",
+        "required": 2
+      },
+      "target": {
+        "placed": "mingle:molten_waste",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "required": 0
+      },
+      "target": {
+        "placed": "@temperature!1000",
+        "replace": "mingle:molten_copper_slag",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "replace": "minecraft:stone",
+        "required": 1
+      },
+      "target": {
+        "placed": "@temperature!1000",
+        "replace": "mingle:molten_copper_slag",
+        "required": 2
       }
     }
-  ],
-  "slag": "minecraft:cobblestone"
+  ]
 }

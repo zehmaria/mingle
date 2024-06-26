@@ -1,11 +1,8 @@
 package zeh.mingle.common;
 
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.ModConfigSpec;
-import zeh.mingle.Mingle;
 
-@EventBusSubscriber(modid = Mingle.ID, bus = EventBusSubscriber.Bus.MOD)
 public class Configuration {
 
     public static ModConfigSpec COMMON_CONFIG;

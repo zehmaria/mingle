@@ -1,4 +1,4 @@
-// 1.21	2024-06-22T03:29:54.429854519	Tags for minecraft:item mod id mingle
+// 1.21	2024-06-24T16:32:30.976409329	Tags for minecraft:item mod id mingle
 68f43dbcb02318543c09c67d4ab33473f913dc58 data/c/tags/item/buckets/molten_aluminum.json
 1f0d5147196fd82b45ce82d6bfea91c7cb96d11f data/c/tags/item/buckets/molten_andesite.json
 3a32687e4dd5ff40b96e5d57f71af08cead61101 data/c/tags/item/buckets/molten_andesite_alloy.json
@@ -34,4 +34,5 @@ c9c7f4c19694fa368107f8e782a5ec381f32dd8b data/c/tags/item/buckets/molten_steel.j
 f7ec1046d2e2c32324bf082e0311c1105b72e8f2 data/c/tags/item/buckets/molten_terrasteel.json
 3fb3a9c256ca4c8eb0579b38d07047dad4d29f23 data/c/tags/item/buckets/molten_tin.json
 6ad99c7f9fbc9cb8c148f1061c2fcc4200bda5ae data/c/tags/item/buckets/molten_uranium.json
+ab2c0536bee9b2fd8de459751258594ad6bfd4db data/c/tags/item/buckets/molten_waste.json
 c2c054231e4925c0f31be987bee2e7d823483f70 data/c/tags/item/buckets/molten_zinc.json

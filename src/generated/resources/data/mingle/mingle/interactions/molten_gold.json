@@ -1,0 +1,119 @@
+{
+  "interactions": [
+    {
+      "fluid": {
+        "placed": "minecraft:lava",
+        "replace": "minecraft:obsidian",
+        "required": 0
+      },
+      "target": {
+        "placed": "#c:storage_blocks/raw_gold",
+        "replace": "mingle:molten_gold"
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_gold",
+        "replace": "#c:storage_blocks/gold",
+        "required": 0
+      },
+      "target": {
+        "placed": "@temperature<301",
+        "replace": "minecraft:air",
+        "required": 0
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_gold",
+        "required": 0
+      },
+      "target": {
+        "placed": "minecraft:water",
+        "replace": "minecraft:cobblestone",
+        "required": 1
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_gold",
+        "replace": "minecraft:cobblestone",
+        "required": 1
+      },
+      "target": {
+        "placed": "minecraft:water",
+        "replace": "minecraft:air",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_gold",
+        "required": 2
+      },
+      "target": {
+        "placed": "minecraft:lava",
+        "replace": "minecraft:magma_block",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_gold",
+        "replace": "mingle:molten_iron",
+        "required": 0
+      },
+      "target": {
+        "placed": "mingle:molten_copper",
+        "replace": "mingle:molten_iron",
+        "required": 0
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_gold",
+        "replace": "mingle:molten_waste",
+        "required": 1
+      },
+      "target": {
+        "placed": "#mingle:waste_mixing",
+        "replace": "mingle:molten_waste",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_gold",
+        "replace": "mingle:molten_waste",
+        "required": 2
+      },
+      "target": {
+        "placed": "mingle:molten_waste",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_gold",
+        "required": 0
+      },
+      "target": {
+        "placed": "@temperature!1000",
+        "replace": "mingle:molten_gold_slag",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_gold",
+        "replace": "minecraft:stone",
+        "required": 1
+      },
+      "target": {
+        "placed": "@temperature!1000",
+        "replace": "mingle:molten_gold_slag",
+        "required": 2
+      }
+    }
+  ]
+}

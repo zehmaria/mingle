@@ -30,9 +30,8 @@ public class MFluidTagsProvider extends FluidTagsProvider {
             }
         }
         for (AllFluids.INSTANCE entry : AllFluids.INSTANCE.values()) {
-            TagKey<Fluid> key = TagKey.create(BuiltInRegistries.FLUID.key(), ResourceLocation.fromNamespaceAndPath("c", entry.id));
-            tag(key).add(entry.STILL.get());
-            tag(key).add(entry.FLOWING.get());
+            tag(entry.tag).add(entry.STILL.get());
+            tag(entry.tag).add(entry.FLOWING.get());
         }
     }
 

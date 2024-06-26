@@ -1,0 +1,84 @@
+{
+  "interactions": [
+    {
+      "fluid": {
+        "placed": "mingle:molten_andesite_alloy",
+        "required": 0
+      },
+      "target": {
+        "placed": "minecraft:water",
+        "replace": "minecraft:cobblestone",
+        "required": 1
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_andesite_alloy",
+        "replace": "minecraft:cobblestone",
+        "required": 1
+      },
+      "target": {
+        "placed": "minecraft:water",
+        "replace": "minecraft:air",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_andesite_alloy",
+        "required": 2
+      },
+      "target": {
+        "placed": "minecraft:lava",
+        "replace": "minecraft:magma_block",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_andesite_alloy",
+        "replace": "mingle:molten_waste",
+        "required": 1
+      },
+      "target": {
+        "placed": "#mingle:waste_mixing",
+        "replace": "mingle:molten_waste",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_andesite_alloy",
+        "replace": "mingle:molten_waste",
+        "required": 2
+      },
+      "target": {
+        "placed": "mingle:molten_waste",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_andesite_alloy",
+        "required": 0
+      },
+      "target": {
+        "placed": "@temperature!1000",
+        "replace": "mingle:molten_andesite_alloy_slag",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_andesite_alloy",
+        "replace": "minecraft:stone",
+        "required": 1
+      },
+      "target": {
+        "placed": "@temperature!1000",
+        "replace": "mingle:molten_andesite_alloy_slag",
+        "required": 2
+      }
+    }
+  ]
+}
