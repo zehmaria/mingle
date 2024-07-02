@@ -9,7 +9,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.client.event.RenderTooltipEvent;
 import org.slf4j.Logger;
 import zeh.mingle.common.Configuration;
 import zeh.mingle.foundation.data.Providers;
@@ -48,16 +47,15 @@ public class Mingle {
 
     public static void addBlockColors(RegisterColorHandlersEvent.Block event) {
         for (AllFluids.INSTANCE entry : AllFluids.INSTANCE.values()) {
-            event.register((i, l, p, t) -> t == 0 ? entry.color :
-                    t == 1 ? Color.mixColors(entry.color, 0xff000000, 0.3f) :
-                    Color.mixColors(entry.color, 0xff000000, 0.6f), entry.SLAG_BLOCK.get());
+            event.register((i, l, p, t) -> entry.fog, entry.SLAG_BLOCK.get());
         }
     }
 
     public static void addItemColors(RegisterColorHandlersEvent.Item event) {
         for (AllFluids.INSTANCE entry : AllFluids.INSTANCE.values()) {
-            event.register((i, t) -> t == 1 ? entry.color : 0xFFFFFFFF, entry.BUCKET_ITEM.get());
-        }
+            event.register((i, t) -> t == 1 ? entry.color : 0xffffffff, entry.BUCKET_ITEM.get());
+
+            event.register((i, t) ->  entry.fog, entry.SLAG_ITEM.get());        }
     }
 
     public static ResourceLocation as(String path) {

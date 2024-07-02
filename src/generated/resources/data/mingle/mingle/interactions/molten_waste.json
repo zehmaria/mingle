@@ -3,34 +3,33 @@
     {
       "fluid": {
         "placed": "mingle:molten_waste",
-        "required": 0
-      },
-      "target": {
-        "placed": "minecraft:water",
-        "replace": "minecraft:cobblestone",
-        "required": 1
-      }
-    },
-    {
-      "fluid": {
-        "placed": "mingle:molten_waste",
-        "replace": "minecraft:cobblestone",
-        "required": 1
-      },
-      "target": {
-        "placed": "minecraft:water",
-        "replace": "minecraft:air",
-        "required": 2
-      }
-    },
-    {
-      "fluid": {
-        "placed": "mingle:molten_waste",
         "required": 2
       },
       "target": {
         "placed": "minecraft:lava",
         "replace": "minecraft:magma_block",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_waste",
+        "required": 0
+      },
+      "target": {
+        "placed": "@temperature!1000",
+        "replace": "mingle:molten_waste_slag",
+        "required": 2
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_waste",
+        "replace": "mingle:molten_waste_slag",
+        "required": 1
+      },
+      "target": {
+        "placed": "@temperature!1000",
         "required": 2
       }
     }

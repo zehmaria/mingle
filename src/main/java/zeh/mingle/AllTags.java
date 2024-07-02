@@ -59,7 +59,7 @@ public class AllTags {
     }
 
     public enum AllItemTags {
-        LAVA_RESISTANT;
+        ;
 
         public final TagKey<Item> tag;
         public final boolean alwaysDatagen;

@@ -4,72 +4,72 @@
     {
       "faces": {
         "down": {
-          "texture": "#all",
-          "tintindex": 0
+          "texture": "#inside",
+          "tintindex": 1
         },
         "east": {
-          "texture": "#all",
-          "tintindex": 0
+          "texture": "#inside",
+          "tintindex": 1
         },
         "north": {
-          "texture": "#all",
-          "tintindex": 0
+          "texture": "#inside",
+          "tintindex": 1
         },
         "south": {
-          "texture": "#all",
-          "tintindex": 0
+          "texture": "#inside",
+          "tintindex": 1
         },
         "up": {
-          "texture": "#all",
-          "tintindex": 0
+          "texture": "#inside",
+          "tintindex": 1
         },
         "west": {
-          "texture": "#all",
-          "tintindex": 0
+          "texture": "#inside",
+          "tintindex": 1
         }
       },
       "from": [
-        2,
-        2,
-        2
+        1,
+        1,
+        1
       ],
       "to": [
-        14,
-        14,
-        14
+        15,
+        15,
+        15
       ]
     },
     {
       "faces": {
         "down": {
           "cullface": "down",
-          "texture": "#inside",
-          "tintindex": 2
+          "texture": "#all",
+          "tintindex": 0
         },
         "east": {
           "cullface": "east",
-          "texture": "#inside",
-          "tintindex": 2
+          "texture": "#all",
+          "tintindex": 0
         },
         "north": {
           "cullface": "north",
-          "texture": "#inside",
-          "tintindex": 2
+          "texture": "#all",
+          "tintindex": 0
         },
         "south": {
           "cullface": "south",
-          "texture": "#inside",
-          "tintindex": 2
+          "texture": "#all",
+          "tintindex": 0
         },
         "up": {
           "cullface": "up",
-          "texture": "#inside",
-          "tintindex": 2
+          "texture": "#all",
+          "tintindex": 0
         },
         "west": {
           "cullface": "west",
-          "texture": "#inside",
-          "tintindex": 2
+          "texture": "#all",
+          "tintindex": 0
         }
       },
       "from": [

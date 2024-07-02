@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import zeh.mingle.AllFluids;
 import zeh.mingle.AllTags;
 import zeh.mingle.Mingle;
+import zeh.mingle.fluids.MoltenWasteFlowingFluid;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -26,12 +27,18 @@ public class MFluidTagsProvider extends FluidTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider pProvider) {
         for (Holder<Fluid> entry : AllFluids.FLUIDS.getEntries()) {
             if (entry.value().defaultFluidState().isSource()) {
-                tag(AllTags.AllFluidTags.WASTE_MIXING.tag).add(entry.value());
+                if (!(entry.value() instanceof MoltenWasteFlowingFluid)) {
+                    //tag(AllTags.AllFluidTags.WASTE_MIXING.tag).add(entry.value());
+                }
             }
         }
         for (AllFluids.INSTANCE entry : AllFluids.INSTANCE.values()) {
             tag(entry.tag).add(entry.STILL.get());
             tag(entry.tag).add(entry.FLOWING.get());
+            if (!entry.name.equals(AllFluids.INSTANCE.WASTE.name)) {
+                tag(AllTags.AllFluidTags.WASTE_MIXING.tag).add(entry.STILL.get());
+                tag(AllTags.AllFluidTags.WASTE_MIXING.tag).add(entry.FLOWING.get());
+            }
         }
     }
 

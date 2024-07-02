@@ -26,29 +26,6 @@
     {
       "fluid": {
         "placed": "mingle:molten_copper",
-        "required": 0
-      },
-      "target": {
-        "placed": "minecraft:water",
-        "replace": "minecraft:cobblestone",
-        "required": 1
-      }
-    },
-    {
-      "fluid": {
-        "placed": "mingle:molten_copper",
-        "replace": "minecraft:cobblestone",
-        "required": 1
-      },
-      "target": {
-        "placed": "minecraft:water",
-        "replace": "minecraft:air",
-        "required": 2
-      }
-    },
-    {
-      "fluid": {
-        "placed": "mingle:molten_copper",
         "required": 2
       },
       "target": {
@@ -60,12 +37,24 @@
     {
       "fluid": {
         "placed": "mingle:molten_copper",
-        "replace": "mingle:molten_iron",
+        "replace": "mingle:molten_brass",
         "required": 0
       },
       "target": {
-        "placed": "mingle:molten_gold",
-        "replace": "mingle:molten_iron",
+        "placed": "mingle:molten_zinc",
+        "replace": "mingle:molten_brass",
+        "required": 0
+      }
+    },
+    {
+      "fluid": {
+        "placed": "mingle:molten_copper",
+        "replace": "mingle:molten_constantan",
+        "required": 0
+      },
+      "target": {
+        "placed": "mingle:molten_nickel",
+        "replace": "mingle:molten_constantan",
         "required": 0
       }
     },
@@ -84,17 +73,6 @@
     {
       "fluid": {
         "placed": "mingle:molten_copper",
-        "replace": "mingle:molten_waste",
-        "required": 2
-      },
-      "target": {
-        "placed": "mingle:molten_waste",
-        "required": 2
-      }
-    },
-    {
-      "fluid": {
-        "placed": "mingle:molten_copper",
         "required": 0
       },
       "target": {
@@ -106,12 +84,11 @@
     {
       "fluid": {
         "placed": "mingle:molten_copper",
-        "replace": "minecraft:stone",
+        "replace": "mingle:molten_copper_slag",
         "required": 1
       },
       "target": {
         "placed": "@temperature!1000",
-        "replace": "mingle:molten_copper_slag",
         "required": 2
       }
     }

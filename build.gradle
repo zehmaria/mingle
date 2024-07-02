@@ -1,7 +1,8 @@
 plugins {
-    id 'idea'
-    id 'net.neoforged.gradle.userdev' version '7.0.145' //https://projects.neoforged.net/neoforged/neogradle
-    id 'java-library'
+    id('java')
+    id('eclipse')
+    id('idea')
+    id('net.neoforged.gradle.userdev') version('7.0.151')//https://projects.neoforged.net/neoforged/neogradle
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -78,33 +79,6 @@ repositories {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neoforge_version}"
-}
-
-//Minimize/optimize all png files, requires optipng on the PATH
-// Credits: BrainStone
-void minimizePNGFile(File file) {
-    long size = file.length()
-    exec {
-        executable "optipng"
-        args "-q", "-o7", "-zm1-9", "-strip", "all", file
-    }
-    long newSize = file.length()
-    if (newSize < size) {
-        System.out.format("Reduced File size of %s from %d bytes to %d bytes (reduced by %.2f%%)\n",
-                file, size, newSize, ((double) (size - newSize)) / ((double) size) * 100.0)
-    }
-}
-
-task optimizePng {
-    def pngPatterns = ["**/*.png"]
-    doLast {
-        //Ensure the logo is minimized (we add this file to each jar)
-        minimizePNGFile(file("${projectDir}/logo.png"))
-        //Minimize any PNGs in the source sets
-        for (dir in sourceSets.main.resources.srcDirs) {
-            fileTree(dir: dir, includes: pngPatterns).each { minimizePNGFile(it) }
-        }
-    }
 }
 
 tasks.named('jar', Jar).configure {
