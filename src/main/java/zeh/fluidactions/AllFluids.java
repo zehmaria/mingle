@@ -38,7 +38,7 @@ public class AllFluids {
     public static FluidEntry<Flowing> moltenFluid(String name, String lang, int fogColor) {
         return REGISTRATE.fluid(
                         name, FluidActions.asResource("block/fluid/molten_still"),
-                        FluidActions.asResource("block/fluid/molten_still"),
+                        FluidActions.asResource("block/fluid/molten_flow"),
                         MoltenFluidType.create(fogColor, () -> 1f / 64f))
                 .lang(lang)
                 .properties(b -> b.viscosity(7500).density(3500).canDrown(true)
@@ -59,18 +59,18 @@ public class AllFluids {
 
 
     // VANILLA
-    public static final FluidEntry<Flowing> MOLTEN_IRON = moltenFluid("molten_iron", "Molten Iron", 0xff7f171c);
-    public static final FluidEntry<Flowing> MOLTEN_GOLD = moltenFluid("molten_gold", "Molten Gold", 0xffAC9000);
-    public static final FluidEntry<Flowing> MOLTEN_COPPER = moltenFluid("molten_copper", "Molten Copper", 0xffC77B41);
+    public static final FluidEntry<Flowing> MOLTEN_IRON = moltenFluid("molten_iron", "Molten Iron", 0xff910000);
+    public static final FluidEntry<Flowing> MOLTEN_GOLD = moltenFluid("molten_gold", "Molten Gold", 0xffF5BD02);
+    public static final FluidEntry<Flowing> MOLTEN_COPPER = moltenFluid("molten_copper", "Molten Copper", 0xffDE5244);
 
-    public static final FluidEntry<Flowing> MOLTEN_ANDESITE = moltenFluid("molten_andesite", "Molten Andesite", 0xff7b7d7d);
-    public static final FluidEntry<Flowing> MOLTEN_SOUL = moltenFluid("molten_soul", "Molten Soul", 0xff80461B);
-    public static final FluidEntry<Flowing> MOLTEN_ENDER = moltenFluid("molten_ender", "Molten Ender", 0xff023020);
-    public static final FluidEntry<Flowing> MOLTEN_SLIME = moltenFluid("molten_slime", "Molten Slime", 0xff32CD32);
+    public static final FluidEntry<Flowing> MOLTEN_ANDESITE = moltenFluid("molten_andesite", "Molten Andesite", 0xffa2a3a3);
+    public static final FluidEntry<Flowing> MOLTEN_SOUL = moltenFluid("molten_soul", "Molten Soul", 0xff41230e);
+    public static final FluidEntry<Flowing> MOLTEN_ENDER = moltenFluid("molten_ender", "Molten Ender", 0xff034830);
+    public static final FluidEntry<Flowing> MOLTEN_SLIME = moltenFluid("molten_slime", "Molten Slime", 0xff70dc70);
     public static final FluidEntry<Flowing> MOLTEN_QUARTZ = moltenFluid("molten_quartz", "Molten Quartz", 0xffF5F5DC);
     public static final FluidEntry<Flowing> MOLTEN_GLASS = moltenFluid("molten_glass", "Molten Glass", 0xffF6B26B);
-    public static final FluidEntry<Flowing> MOLTEN_NETHERITE = moltenFluid("molten_netherite", "Molten Netherite", 0xff5C4033);
-    public static final FluidEntry<Flowing> MOLTEN_DEBRIS = moltenFluid("molten_debris", "Molten Debris", 0xff988558);
+    public static final FluidEntry<Flowing> MOLTEN_NETHERITE = moltenFluid("molten_netherite", "Molten Netherite", 0xff3b2921);
+    public static final FluidEntry<Flowing> MOLTEN_DEBRIS = moltenFluid("molten_debris", "Molten Debris", 0xff88774f);
 
     // GENERAL
     public static final FluidEntry<Flowing> MOLTEN_ANDESITE_ALLOY = moltenFluid("molten_andesite_alloy", "Molten Andesite Alloy", 0xff757575);
@@ -150,13 +150,8 @@ public class AllFluids {
                 @Override
                 public void modifyFogRender(Camera camera, FogMode mode, float renderDistance, float partialTick,
                                             float nearDistance, float farDistance, FogShape shape) {
-                    float modifier = TintedFluidType.this.getFogDistanceModifier();
-                    float baseWaterFog = 96.0f;
-                    if (modifier != 1f) {
-                        RenderSystem.setShaderFogShape(FogShape.CYLINDER);
-                        RenderSystem.setShaderFogStart(-8);
-                        RenderSystem.setShaderFogEnd(baseWaterFog * modifier);
-                    }
+                    RenderSystem.setShaderFogStart(-8F);
+                    RenderSystem.setShaderFogEnd(1.0f);
                 }
 
             });
@@ -212,8 +207,8 @@ public class AllFluids {
         public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
             if(!entity.isOnFire()) entity.setSecondsOnFire(4);
             else entity.setRemainingFireTicks(20 * 4);
-            entity.setSpeed(0.001f);
-            entity.setDeltaMovement(entity.getDeltaMovement().scale(0.001f));
+            entity.setSpeed(0.25f);
+            entity.setDeltaMovement(entity.getDeltaMovement().scale(0.25f));
             return false;
         }
 
