@@ -71,6 +71,18 @@
 			"from_port": 0,
 			"to": "graph",
 			"to_port": 0
+		},
+		{
+			"from": "graph_2",
+			"from_port": 0,
+			"to": "blend2",
+			"to_port": 1
+		},
+		{
+			"from": "fill_to_color",
+			"from_port": 0,
+			"to": "blend2",
+			"to_port": 0
 		}
 	],
 	"label": "Graph",
@@ -2538,7 +2550,7 @@
 			"name": "graph_12",
 			"node_position": {
 				"x": -840.711426,
-				"y": 182.288986
+				"y": 181.288986
 			},
 			"nodes": [
 				{
@@ -3323,6 +3335,38 @@
 			"seed_int": 0,
 			"shortdesc": "",
 			"type": "graph"
+		},
+		{
+			"generic_size": 1,
+			"name": "blend2",
+			"node_position": {
+				"x": -157.448364,
+				"y": -45.164551
+			},
+			"parameters": {
+				"amount1": 1,
+				"blend_type1": 2
+			},
+			"seed_int": 0,
+			"type": "blend2"
+		},
+		{
+			"name": "fill_to_color",
+			"node_position": {
+				"x": -391.448364,
+				"y": -74.164551
+			},
+			"parameters": {
+				"edgecolor": {
+					"a": 1,
+					"b": 0.266667,
+					"g": 0.321569,
+					"r": 0.870588,
+					"type": "Color"
+				}
+			},
+			"seed_int": 0,
+			"type": "fill_to_color2"
 		}
 	],
 	"parameters": {

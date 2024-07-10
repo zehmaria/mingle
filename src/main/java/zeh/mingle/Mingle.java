@@ -12,7 +12,6 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import org.slf4j.Logger;
 import zeh.mingle.common.Configuration;
 import zeh.mingle.foundation.data.Providers;
-import zeh.mingle.foundation.utility.Color;
 import zeh.mingle.registry.Interaction;
 
 @Mod(Mingle.ID)

@@ -25,12 +25,10 @@ public record Interaction(List<InteractedSet> interactions) {
 
     @SubscribeEvent
     public static void addNew(final ServerAboutToStartEvent event) {
-        Mingle.LOGGER.info("----------ADD NEW--------------{}", hasLoadedOnce);
         if (hasLoadedOnce) return;
         event.getServer().registryAccess().registry(Interaction.KEY)
                 .ifPresent(it -> it.forEach(Interaction::registerInteractions));
         hasLoadedOnce = true;
-        Mingle.LOGGER.info("-----------ADDED-------------{}", hasLoadedOnce);
     }
     public void registerInteractions() { interactions().forEach(InteractedSet::add); }
 

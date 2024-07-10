@@ -8,7 +8,7 @@ license="MIT"
     version="${version}"
     displayName="Mingle"
     displayURL="https://github.com/zehmaria/mingle"
-	authors="zeh_maria"
+	  authors="zeh_maria"
     logoFile="logo.png"
     description="Adds Fluids and related interactions."
 
