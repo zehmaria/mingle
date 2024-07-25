@@ -1,6 +1,5 @@
 plugins {
     id('java')
-    id('eclipse')
     id('idea')
     id('net.neoforged.gradle.userdev') version('7.0.151')//https://projects.neoforged.net/neoforged/neogradle
 }
@@ -15,7 +14,6 @@ idea {
     module {
         //Exclude directories from being managed
         for (String excludeDirName in ["runs", "out", "logs", "gradle"]) {
-            //excludeDirs.add(new File(projectDir, excludeDirName))
             excludeDirs.add(file(excludeDirName))
         }
         //Tell IDEA to always download sources/javadoc artifacts from maven.
